@@ -372,7 +372,7 @@ leaflet_distritos <- leaflet(sf_general_distritos_ultima_fecha) %>%
   addPolygons(fillColor = ~paleta_azul(positivos), stroke=T, fillOpacity = 1,
               color="black", weight=0.2, opacity= 0.5,
               group = "Distritos",
-              popup = paste("Provincia: ", sf_positivos_cantones_ultima_fecha$provincia, "",
+              popup = paste("Cantón: ", sf_general_distritos_ultima_fecha$canton, "",
                             "Distrito: ", sf_general_distritos_ultima_fecha$distrito, "",
                             "Positivos: ", sf_general_distritos_ultima_fecha$positivos
                             )
@@ -455,8 +455,8 @@ leaflet_distritos <- leaflet(sf_general_distritos_ultima_fecha) %>%
   addPolygons(fillColor = ~paleta_activos(activos), stroke=T, fillOpacity = 1,
               color="black", weight=0.2, opacity= 0.5,
               group = "Distritos",
-              popup = paste("Provincia: ", sf_activos_cantones_ultima_fecha$provincia, "",
-                            "Cantón: ", sf_general_distritos_ultima_fecha$distrito, "",
+              popup = paste("Cantón: ", sf_general_distritos_ultima_fecha$canton, "",
+                            "Distrito: ", sf_general_distritos_ultima_fecha$distrito, "",
                             "Activos: ", sf_general_distritos_ultima_fecha$activos
               )
   ) %>%
@@ -537,8 +537,8 @@ leaflet_distritos <- leaflet(sf_general_distritos_ultima_fecha) %>%
   addPolygons(fillColor = ~paleta_recuperados(recuperados), stroke=T, fillOpacity = 1,
               color="black", weight=0.2, opacity= 0.5,
               group = "Distritos",
-              popup = paste("Provincia: ", sf_recuperados_cantones_ultima_fecha$provincia, "",
-                            "Cantón: ", sf_general_distritos_ultima_fecha$distrito, "",
+              popup = paste("Cantón: ", sf_general_distritos_ultima_fecha$canton, "",
+                            "Distrito: ", sf_general_distritos_ultima_fecha$distrito, "",
                             "Recuperados: ", sf_general_distritos_ultima_fecha$recuperados
               )
   ) %>%
@@ -619,7 +619,7 @@ leaflet_distritos <- leaflet(sf_general_distritos_ultima_fecha) %>%
   addPolygons(fillColor = ~paleta_fallecidos(fallecidos), stroke=T, fillOpacity = 1,
               color="black", weight=0.2, opacity= 0.5,
               group = "Distrito",
-              popup = paste("Provincia: ", sf_fallecidos_cantones_ultima_fecha$provincia, "",
+              popup = paste("Cantón: ", sf_general_distritos_ultima_fecha$canton, "",
                             "Distrito: ", sf_general_distritos_ultima_fecha$distrito, "",
                             "Fallecidos: ", sf_general_distritos_ultima_fecha$fallecidos)
   ) %>%
