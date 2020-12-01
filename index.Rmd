@@ -204,7 +204,7 @@ Row {data-height=10}
 ### **Última actualización de datos realizada el `r  df_general_pais_ultima_fecha$FECHA` con base en los [datos publicados por el Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/)**.
 
 
-Row
+Row {data-height=100}
 -----------------------------------------------------------------------
 
 ### Casos positivos {.value-box}
@@ -217,6 +217,7 @@ valueBox(value = paste(format(df_general_pais_ultima_fecha$positivos, big.mark =
 ```
 
 ### Casos activos {.value-box}
+
 ```{r}
 valueBox(value = paste(format(df_general_pais_ultima_fecha$activos, big.mark = ","), " (",
                        round(100 * df_general_pais_ultima_fecha$activos / df_general_pais_ultima_fecha$positivos, 1), 
@@ -249,10 +250,12 @@ valueBox(value = paste(format(df_general_pais_ultima_fecha$fallecidos, big.mark 
 )
 ```
 
+
 Row
 -----------------------------------------------------------------------
 
 ### Hospitalizados {.value-box}
+
 ```{r}
 valueBox(value = paste(format(df_general_pais_ultima_fecha$hospital, big.mark = ","), "", sep = " "), 
          caption = "Total de hospitalizados", 
@@ -262,6 +265,7 @@ valueBox(value = paste(format(df_general_pais_ultima_fecha$hospital, big.mark = 
 ```
 
 ### En salón {.value-box}
+
 ```{r}
 valueBox(value = paste(format(df_general_pais_ultima_fecha$salon, big.mark = ","), " (",
                        round(100 * df_general_pais_ultima_fecha$salon / df_general_pais_ultima_fecha$hospital, 1), 
@@ -273,6 +277,7 @@ valueBox(value = paste(format(df_general_pais_ultima_fecha$salon, big.mark = ","
 ```
 
 ### En UCI {.value-box}
+
 ```{r}
 valueBox(value = paste(format(df_general_pais_ultima_fecha$UCI, big.mark = ","), " (",
                        round(100 * df_general_pais_ultima_fecha$UCI / df_general_pais_ultima_fecha$hospital, 1), 
@@ -283,10 +288,19 @@ valueBox(value = paste(format(df_general_pais_ultima_fecha$UCI, big.mark = ","),
 )
 ```
 
-Row {data-width=400}
+### Alerta de capacidad en salón UCI
+```{r}
+Capacidad_UCI <- df_general_pais_ultima_fecha$UCI
+gauge(Capacidad_UCI, min = 0, max = 359, gaugeSectors(
+  success = c(0, 150), warning = c(151, 250), danger = c(251, 359)
+))
+```
+
+Row {data-width=100}
 -----------------------------------------------------------------------
 
 ### Gráfico de variación de las cantidades de casos en el tiempo
+
 ```{r}
 plot_ly(data = df_general_pais,
                 x = ~ FECHA,
@@ -326,19 +340,13 @@ st_drop_geometry(sf_general_distritos_ultima_fecha) %>%
   )
 ```
 
-Row {data-width=400}
+Row {data-width=400} Row {data-height=5} 
 -----------------------------------------------------------------------
-### Alerta de capacidad en salón UCI
-```{r}
-Capacidad_UCI <- df_general_pais_ultima_fecha$UCI
-gauge(Capacidad_UCI, min = 0, max = 359, gaugeSectors(
-  success = c(0, 150), warning = c(151, 250), danger = c(251, 359)
-))
-```
+
 
 Casos positivos
 =======================================================================
-Row {data-height=10}
+
 -----------------------------------------------------------------------
 ### **Última actualización de datos realizada el `r  df_general_pais_ultima_fecha$FECHA` con base en los [datos publicados por el Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/)**
 
