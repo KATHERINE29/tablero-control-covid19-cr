@@ -275,57 +275,16 @@ valueBox(value = paste(format(df_general_pais_ultima_fecha$salon, big.mark = ","
 )
 ```
 
-### En UCI {.value-box}
-
-```{r}
-valueBox(value = paste(format(df_general_pais_ultima_fecha$UCI, big.mark = ","), " (",
-                       round(100 * df_general_pais_ultima_fecha$UCI / df_general_pais_ultima_fecha$hospital, 1), 
-                       "%)", sep = ""), 
-         caption = "Hospitalizados en UCI",
-         icon = icono_uci, 
-         color = color_uci
-)
-```
-
 ### Alerta de capacidad en salón UCI
 ```{r}
-Capacidad_UCI <- df_general_pais_ultima_fecha$UCI
-gauge(Capacidad_UCI, min = 0, max = 359, gaugeSectors(
-  success = c(0, 150), warning = c(151, 250), danger = c(251, 359)
+Capacidad_UCI <- df_general_pais_ultima_fecha$promedio_UCI
+gauge(Capacidad_UCI, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(0, 35), warning = c(36, 70), danger = c(71, 100)
 ))
 ```
 
 Row {data-width=100}
 -----------------------------------------------------------------------
-
-### Gráfico de variación de las cantidades de casos en el tiempo
-
-```{r}
-plot_ly(data = df_general_pais,
-                x = ~ FECHA,
-                y = ~ positivos, 
-                name = 'Positivos', 
-                type = 'scatter',
-                mode = 'lines',
-                line = list(color = color_positivos)) %>%
-  add_trace(y = ~ activos,
-                    name = 'Activos',
-                    mode = 'lines',
-                    line = list(color = color_activos)) %>%
-  add_trace(y = ~ RECUPERADOS,
-                    name = 'Recuperados',
-                    mode = 'lines',
-                    line = list(color = color_recuperados)) %>%
-  add_trace(y = ~ fallecidos,
-                    name = 'Fallecidos',
-                    mode = 'lines',
-                    line = list(color = color_fallecidos)) %>%  
-  layout(title = "",
-                 yaxis = list(title = "Cantidad de casos"),
-                 xaxis = list(title = "Fecha"),
-                 legend = list(x = 0.1, y = 0.9),
-                 hovermode = "compare")
-```
 
 ### Tabla de cantidades de casos en distritos
 
