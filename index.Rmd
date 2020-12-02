@@ -201,8 +201,7 @@ Resumen
 =======================================================================
 Row {data-height=10}
 -----------------------------------------------------------------------
-### **Última actualización de datos realizada el `r  df_general_pais_ultima_fecha$FECHA` con base en los [datos publicados por el Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/)**.
-
+### **Última actualización de datos realizada el `r  df_general_pais_ultima_fecha$FECHA` con base en los [datos publicados por el Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/)**
 
 Row {data-height=100}
 -----------------------------------------------------------------------
@@ -346,7 +345,7 @@ Row {data-width=400} Row {data-height=5}
 
 Casos positivos
 =======================================================================
-
+Row {data-height=10}
 -----------------------------------------------------------------------
 ### **Última actualización de datos realizada el `r  df_general_pais_ultima_fecha$FECHA` con base en los [datos publicados por el Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/)**
 
@@ -407,15 +406,14 @@ leaflet_distritos
 
 ### Gráfico de cantones con mayor cantidad de casos positivos
 ```{r}
-st_drop_geometry(sf_positivos_cantones_ultima_fecha) %>%
-mutate(canton = factor(canton, levels = canton)) %>%
+st_drop_geometry(sf_general_distritos_ultima_fecha) %>%
 top_n(n = 10, wt = positivos) %>%  
-plot_ly(x = ~ canton, 
-        y = ~ positivos, 
-        type = "bar", 
-        text = ~ positivos,
+plot_ly(labels = ~ distrito, 
+        Values = ~ positivos, 
+        type = "pie", 
+        text = ~positivos,
         textposition = 'auto',
-        marker = list(color = color_positivos)
+        marker = list(colors = color_positivos, line = list(color = "#ffffcc"))
 ) %>%
 layout(yaxis = list(title = "Cantidad de casos positivos"),
        xaxis = list(title = ""),
@@ -425,7 +423,7 @@ layout(yaxis = list(title = "Cantidad de casos positivos"),
                      t = 10,
                      pad = 2
                 )
-) 
+)
 ```
 
 
@@ -509,6 +507,8 @@ layout(yaxis = list(title = "Cantidad de casos activos"),
                      pad = 2
                 )
 ) 
+
+
 ```
 
 
