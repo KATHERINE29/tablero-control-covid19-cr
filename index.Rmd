@@ -365,15 +365,28 @@ leaflet_distritos
 
 ### Gráfico de cantones con mayor cantidad de casos positivos
 ```{r}
-st_drop_geometry(sf_general_distritos_ultima_fecha) %>%
-top_n(n = 10, wt = positivos) %>%  
-plot_ly(labels = ~ distrito, 
-        Values = ~ positivos, 
+
+positivos_grafico <- c ("rgb(84,48,5)", "rgb(140,81,10)", "rgb(191,129,45)", "rgb(223,194,125)", "rgb(246,232,195)", "rgb(245,245,245)", "rgb(199,234,229)", "rgb(128,205,193)", "rgb(53,151,143)", "rgb(1,102,94)", "rgb(0,60,48)")
+
+positivos_pie <- st_drop_geometry(sf_general_distritos_ultima_fecha) %>% 
+  arrange(desc(positivos)) %>% 
+  slice(11:487)%>%
+  summarize(otros = sum(positivos, na.rm = TRUE)) %>%
+
+
+positivos_pie <- st_drop_geometry(sf_general_distritos_ultima_fecha) %>% 
+  sf_general_distritos_ultima_fecha[, c("distrito", "positivos")] %>% 
+  arrange(desc(positivos)) %>%
+ slice(1:10)
+  
+ top_n(n = 10, wt = sf_general_distritos_ultima_fecha$positivos) %>%
+plot_ly(labels = ~ distrito,
+        Values = ~ positivos,  
         type = "pie", 
         text = ~positivos,
         textposition = 'auto',
-        marker = list(colors = color_positivos, line = list(color = "#ffffcc"))
-) %>%
+        marker = list(colors = "positivos_grafico", line = list(color = '#FFFFFF', width = 1)
+                      )) %>%
 layout(yaxis = list(title = "Cantidad de casos positivos"),
        xaxis = list(title = ""),
        margin = list(l = 10,
@@ -383,6 +396,7 @@ layout(yaxis = list(title = "Cantidad de casos positivos"),
                      pad = 2
                 )
 )
+
 ```
 
 
